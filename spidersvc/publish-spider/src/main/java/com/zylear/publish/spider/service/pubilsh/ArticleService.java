@@ -1,0 +1,14 @@
+package com.zylear.publish.spider.service.pubilsh;
+
+import com.zylear.publish.spider.domain.Article;
+
+/**
+ * Created by xiezongyu on 2018/8/5.
+ */
+public interface ArticleService {
+    Article selectByPrimaryKey(Integer id);
+
+    void insert(Article article);
+
+    Article findBySourceTypeAndTitle(Integer sourceType, String title);
+}
