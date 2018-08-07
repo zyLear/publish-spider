@@ -21,21 +21,21 @@ import java.util.List;
  * @date 2018/1/10.
  */
 @Configuration
-@MapperScan(basePackages = DataSourcePublishConfig.SCAN_PACKAGE)
+@MapperScan(basePackages = DataSourceSpiderConfig.SCAN_PACKAGE)
 @EnableTransactionManagement
-public class DataSourcePublishConfig {
+public class DataSourceSpiderConfig {
 
-    public final static String DATA_SOURCE = "dataSourcePublish";
-    public final static String SCAN_PACKAGE = "com.zylear.publish.spider.dao.mybatis.publish";
-    public final static String SQL_SESSION_FACTORY = "sqlSessionFactoryPublish";
-    public final static String TX_MANAGER = "txManagerPublish";
-    public final static String SQL_SESSION_TEMPLATE = "sqlSessionTemplatePublish";   //don't set this is ok
-    public final static List<String> XML_PATHS = Arrays.asList("classpath:com/zylear/publish/spider/dao/mybatis/publish/*.xml");
-    @Value("${database.publish.username}")
+    public final static String DATA_SOURCE = "dataSourceSpider";
+    public final static String SCAN_PACKAGE = "com.zylear.publish.spider.dao.mybatis.spider";
+    public final static String SQL_SESSION_FACTORY = "sqlSessionFactorySpider";
+    public final static String TX_MANAGER = "txManagerSpider";
+    public final static String SQL_SESSION_TEMPLATE = "sqlSessionTemplateSpider";   //don't set this is ok
+    public final static List<String> XML_PATHS = Arrays.asList("classpath:com/zylear/publish/spider/dao/mybatis/spider/*.xml");
+    @Value("${database.spider.username}")
     private String username;
-    @Value("${database.publish.password}")
+    @Value("${database.spider.password}")
     private String password;
-    @Value("${database.publish.url}")
+    @Value("${database.spider.url}")
     private String url;
     @Value("${mybatis.config.path}")
     private String configPath;

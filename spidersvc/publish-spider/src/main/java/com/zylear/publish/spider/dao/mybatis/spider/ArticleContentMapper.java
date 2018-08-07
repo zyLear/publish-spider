@@ -1,4 +1,4 @@
-package com.zylear.publish.spider.dao.mybatis.publish;
+package com.zylear.publish.spider.dao.mybatis.spider;
 
 import com.zylear.publish.spider.domain.ArticleContent;
 import com.zylear.publish.spider.domain.ArticleContentWithBLOBs;

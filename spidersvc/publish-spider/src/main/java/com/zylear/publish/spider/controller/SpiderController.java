@@ -15,12 +15,22 @@ public class SpiderController {
 
     private Web87GSpiderManager web87GSpiderManager;
 
-    @RequestMapping("/87g")
+    @RequestMapping("/87g/article")
     @ResponseBody
     public String control() {
 
 
         web87GSpiderManager.start();
+
+        return "ok";
+    }
+
+    @RequestMapping("/87g/video")
+    @ResponseBody
+    public String controlVideo() {
+
+
+        web87GSpiderManager.startVideo();
 
         return "ok";
     }

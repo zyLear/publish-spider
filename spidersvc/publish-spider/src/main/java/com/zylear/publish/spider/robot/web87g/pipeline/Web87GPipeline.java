@@ -1,9 +1,7 @@
-package com.zylear.publish.spider.robot.web87g;
+package com.zylear.publish.spider.robot.web87g.pipeline;
 
 import com.zylear.publish.spider.manager.Web87GTxManager;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
-import com.zylear.publish.spider.service.pubilsh.ArticleContentService;
-import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

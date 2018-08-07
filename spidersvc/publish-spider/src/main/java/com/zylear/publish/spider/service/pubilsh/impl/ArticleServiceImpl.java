@@ -1,6 +1,6 @@
 package com.zylear.publish.spider.service.pubilsh.impl;
 
-import com.zylear.publish.spider.dao.mybatis.publish.ArticleMapper;
+import com.zylear.publish.spider.dao.mybatis.spider.ArticleMapper;
 import com.zylear.publish.spider.domain.Article;
 import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
