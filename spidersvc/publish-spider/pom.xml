@@ -109,7 +109,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>publish</finalName>
+		<finalName>spider</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -145,7 +145,7 @@
 				<excludes>
 					<exclude>dev/*</exclude>
 					<exclude>prd/*</exclude>
-					<exclude>local/*</exclude>
+					<!--<exclude>local/*</exclude>-->
 				</excludes>
 			</resource>
 		</resources>

@@ -6,6 +6,8 @@ import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by xiezongyu on 2018/8/5.
  */
@@ -28,4 +30,10 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findBySourceTypeAndTitle(Integer sourceType, String title) {
         return articleMapper.findBySourceTypeAndTitle(sourceType, title);
     }
+
+    @Override
+    public List<Article> findAll() {
+        return articleMapper.findAll();
+    }
+
 }

@@ -3,6 +3,8 @@ package com.zylear.publish.spider.dao.mybatis.spider;
 import com.zylear.publish.spider.domain.Article;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -19,4 +21,6 @@ public interface ArticleMapper {
 
     Article findBySourceTypeAndTitle(@Param("sourceType") Integer sourceType,
                                      @Param("title") String title);
+
+    List<Article> findAll();
 }
