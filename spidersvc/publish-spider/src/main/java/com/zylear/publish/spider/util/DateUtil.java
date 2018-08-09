@@ -14,9 +14,9 @@ public class DateUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(DateUtil.class);
 
-    private final static SimpleDateFormat YMDHMS = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-    private final static SimpleDateFormat YMD = new SimpleDateFormat("YYYY-MM-dd");
-    private final static SimpleDateFormat YMD_COMPACT = new SimpleDateFormat("YYYYMMdd");
+    private final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd");
+    private final static SimpleDateFormat YMD_COMPACT = new SimpleDateFormat("yyyyMMdd");
 
     public static String formatToYDMHMS(Date date) {
         return YMDHMS.format(date);
