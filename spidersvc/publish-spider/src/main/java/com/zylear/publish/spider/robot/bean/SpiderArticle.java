@@ -7,7 +7,15 @@ public class SpiderArticle {
     public SpiderArticle() {
     }
 
-    public SpiderArticle(String title, String content, String css,String sourceUrl) {
+    public SpiderArticle(String title, String content, String css, String sourceUrl, String postTime) {
+        this.title = title;
+        this.content = content;
+        this.css = css;
+        this.sourceUrl = sourceUrl;
+        this.postTime = postTime;
+    }
+
+    public SpiderArticle(String title, String content, String css, String sourceUrl) {
         this.title = title;
         this.content = content;
         this.css = css;
@@ -18,6 +26,16 @@ public class SpiderArticle {
     private String content;
     private String css;
     private String sourceUrl;
+
+    private String postTime;
+
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
+    }
 
     public String getTitle() {
         return title;

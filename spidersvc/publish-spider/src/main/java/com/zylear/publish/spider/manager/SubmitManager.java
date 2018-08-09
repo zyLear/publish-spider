@@ -21,8 +21,8 @@ public class SubmitManager {
     private ArticleContentService articleContentService;
     private PublishWebManager publishWebManager;
 
-    @PostConstruct
-    public void init() {
+//    @PostConstruct
+    public void submit() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -31,12 +31,12 @@ public class SubmitManager {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                submit();
+                submitArticle();
             }
         }).start();
     }
 
-    public void submit() {
+    private void submitArticle() {
         List<Article> articles = articleService.findAll();
         for (Article article : articles) {
 

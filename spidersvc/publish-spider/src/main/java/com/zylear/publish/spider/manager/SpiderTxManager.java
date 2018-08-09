@@ -11,6 +11,7 @@ import com.zylear.publish.spider.robot.bean.SpiderArticle;
 import com.zylear.publish.spider.service.pubilsh.ArticleContentService;
 import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import com.zylear.publish.spider.service.pubilsh.VideoService;
+import com.zylear.publish.spider.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,7 +125,7 @@ public class SpiderTxManager {
         article.setSourceType(SourceType.duowan.getValue());
         article.setSourceUrl(spiderArticle.getSourceUrl());
         article.setTitle(spiderArticle.getTitle());
-        article.setPostTime(null);
+        article.setPostTime(DateUtil.getDateFromYDMHMS(spiderArticle.getPostTime()));
         article.setContentId(articleContent.getId());
         article.setPageView(0);
         article.setIsDeleted(false);
