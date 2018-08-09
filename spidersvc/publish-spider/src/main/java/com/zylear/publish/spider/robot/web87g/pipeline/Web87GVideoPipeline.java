@@ -1,6 +1,6 @@
 package com.zylear.publish.spider.robot.web87g.pipeline;
 
-import com.zylear.publish.spider.manager.Web87GTxManager;
+import com.zylear.publish.spider.manager.SpiderTxManager;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,20 +14,20 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 @Component
 public class Web87GVideoPipeline implements Pipeline {
 
-    private Web87GTxManager web87GTxManager;
+    private SpiderTxManager spiderTxManager;
 
     @Override
     public void process(ResultItems resultItems, Task task) {
         SpiderArticle article = resultItems.get("article");
         if (article != null) {
-            web87GTxManager.saveVideo(article);
+            spiderTxManager.saveVideo(article);
 //            System.out.println(article);
         }
 
     }
 
     @Autowired
-    public void setWeb87GTxManager(Web87GTxManager web87GTxManager) {
-        this.web87GTxManager = web87GTxManager;
+    public void setSpiderTxManager(SpiderTxManager spiderTxManager) {
+        this.spiderTxManager = spiderTxManager;
     }
 }

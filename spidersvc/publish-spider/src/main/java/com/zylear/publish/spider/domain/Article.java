@@ -9,7 +9,7 @@ public class Article {
 
     private String title;
 
-    private Integer articleCategory;
+    private Integer spiderCategory;
 
     private Date postTime;
 
@@ -49,12 +49,12 @@ public class Article {
         this.title = title;
     }
 
-    public Integer getArticleCategory() {
-        return articleCategory;
+    public Integer getSpiderCategory() {
+        return spiderCategory;
     }
 
-    public void setArticleCategory(Integer articleCategory) {
-        this.articleCategory = articleCategory;
+    public void setSpiderCategory(Integer spiderCategory) {
+        this.spiderCategory = spiderCategory;
     }
 
     public Date getPostTime() {

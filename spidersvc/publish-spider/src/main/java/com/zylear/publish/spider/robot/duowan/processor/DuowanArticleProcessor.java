@@ -41,14 +41,13 @@ public class DuowanArticleProcessor implements PageProcessor {
         } else {
 
             Selectable selectable = page.getHtml().xpath("//link[@rel='stylesheet']");
-            String title = page.getHtml().xpath("//div[@class='m-article']/h1/text()").toString();
-
             StringBuilder css = new StringBuilder("");
             for (Selectable node : selectable.nodes()) {
                 css.append(node);
             }
+            String title = page.getHtml().xpath("//div[@class='ZQ-71-51']/div[contains(@class,'ZQ-page')]/h1/text()").toString();
 
-            String content = page.getHtml().xpath("//div[@class='m-article']/div[@class='cont']").toString();
+            String content = page.getHtml().xpath("//div[@class='ZQ-71-51']/div[contains(@class,'ZQ-page')]//div[@id='text']").toString();
 
             SpiderArticle article = new SpiderArticle(title, content, css.toString(), page.getUrl().toString());
             page.putField("article", article);

@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="article_category" property="articleCategory" jdbcType="TINYINT"/>
+        <result column="article_category" property="spiderCategory" jdbcType="TINYINT"/>
         <result column="post_time" property="postTime" jdbcType="TIMESTAMP"/>
         <result column="content_id" property="contentId" jdbcType="INTEGER"/>
         <result column="source_url" property="sourceUrl" jdbcType="VARCHAR"/>
@@ -34,7 +34,7 @@
                                source_url, page_view, is_deleted,
                                create_time, last_update_time)
         VALUES (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR},
-                                        #{articleCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP},
+                                        #{spiderCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP},
                                         #{contentId,jdbcType=INTEGER},
                                         #{sourceUrl,jdbcType=VARCHAR}, #{pageView,jdbcType=INTEGER},
                                         #{isDeleted,jdbcType=TINYINT},
@@ -52,7 +52,7 @@
             <if test="title != null">
                 title,
             </if>
-            <if test="articleCategory != null">
+            <if test="spiderCategory != null">
                 article_category,
             </if>
             <if test="postTime != null">
@@ -87,8 +87,8 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="articleCategory != null">
-                #{articleCategory,jdbcType=TINYINT},
+            <if test="spiderCategory != null">
+                #{spiderCategory,jdbcType=TINYINT},
             </if>
             <if test="postTime != null">
                 #{postTime,jdbcType=TIMESTAMP},
@@ -122,8 +122,8 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="articleCategory != null">
-                article_category = #{articleCategory,jdbcType=TINYINT},
+            <if test="spiderCategory != null">
+                article_category = #{spiderCategory,jdbcType=TINYINT},
             </if>
             <if test="postTime != null">
                 post_time = #{postTime,jdbcType=TIMESTAMP},
@@ -153,7 +153,7 @@
         UPDATE t_article
         SET source_type      = #{sourceType,jdbcType=TINYINT},
             title            = #{title,jdbcType=VARCHAR},
-            article_category = #{articleCategory,jdbcType=TINYINT},
+            article_category = #{spiderCategory,jdbcType=TINYINT},
             post_time        = #{postTime,jdbcType=TIMESTAMP},
             content_id       = #{contentId,jdbcType=INTEGER},
             source_url       = #{sourceUrl,jdbcType=VARCHAR},
@@ -173,6 +173,13 @@
         AND title = #{title,jdbcType=VARCHAR}
         AND is_deleted = 0
 
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_article
+        WHERE is_deleted=0
     </select>
 
 </mapper>

@@ -38,14 +38,6 @@ public class Web87GSpiderManager {
                 .setExitWhenComplete(true)
                 .thread(3)
                 .runAsync();
-
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                go();
-//            }
-//        }.start();
-
     }
 
     @Autowired

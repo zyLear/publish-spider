@@ -5,6 +5,7 @@ import com.zylear.publish.spider.domain.Article;
 import com.zylear.publish.spider.domain.ArticleContentWithBLOBs;
 import com.zylear.publish.spider.domain.Video;
 import com.zylear.publish.spider.enums.SourceType;
+import com.zylear.publish.spider.enums.SpiderCategory;
 import com.zylear.publish.spider.enums.VideoType;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
 import com.zylear.publish.spider.service.pubilsh.ArticleContentService;
@@ -22,16 +23,16 @@ import java.util.Date;
  * Created by xiezongyu on 2018/8/5.
  */
 @Component
-public class Web87GTxManager {
+public class SpiderTxManager {
 
-    private static final Logger logger = LoggerFactory.getLogger(Web87GTxManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpiderTxManager.class);
 
     private ArticleService articleService;
     private ArticleContentService articleContentService;
     private VideoService videoService;
 
     @Transactional(DataSourceSpiderConfig.TX_MANAGER)
-    public void saveArticle(SpiderArticle spiderArticle) {
+    public void save87GArticle(SpiderArticle spiderArticle) {
 
         Article exist = articleService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
 
@@ -50,8 +51,8 @@ public class Web87GTxManager {
         articleContentService.insert(articleContent);
 
         Article article = new Article();
-        article.setArticleCategory(1);
-        article.setSourceType(1);
+        article.setSpiderCategory(SpiderCategory.pubg.getValue());
+        article.setSourceType(SourceType.web_78g.getValue());
         article.setSourceUrl(spiderArticle.getSourceUrl());
         article.setTitle(spiderArticle.getTitle());
         article.setPostTime(null);
@@ -65,6 +66,7 @@ public class Web87GTxManager {
 
     }
 
+    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
     public void saveVideo(SpiderArticle spiderArticle) {
         Video exist = videoService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
 
@@ -83,8 +85,8 @@ public class Web87GTxManager {
         articleContentService.insert(articleContent);
 
         Video video = new Video();
-        video.setArticleCategory(1);
-        video.setSourceType(1);
+        video.setArticleCategory(SpiderCategory.pubg.getValue());
+        video.setSourceType(SourceType.web_78g.getValue());
         video.setSourceUrl(spiderArticle.getSourceUrl());
         video.setTitle(spiderArticle.getTitle());
         video.setPostTime(null);
@@ -96,6 +98,41 @@ public class Web87GTxManager {
         video.setVideoType(VideoType.comtent_html.getValue());
         videoService.insert(video);
         logger.info("save video:{}", spiderArticle);
+    }
+
+    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
+    public void saveDuowanArticle(SpiderArticle spiderArticle) {
+
+        Article exist = articleService.findBySourceTypeAndTitle(SourceType.duowan.getValue(), spiderArticle.getTitle());
+
+        if (exist != null) {
+            logger.info("article exist. sourceType:{} title:{}", SourceType.duowan.getValue(), spiderArticle.getTitle());
+            return;
+        }
+
+        Date date = new Date();
+        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
+        articleContent.setCss(spiderArticle.getCss());
+        articleContent.setContent(spiderArticle.getContent());
+        articleContent.setIsDeleted(false);
+        articleContent.setCreateTime(date);
+        articleContent.setLastUpdateTime(date);
+        articleContentService.insert(articleContent);
+
+        Article article = new Article();
+        article.setSpiderCategory(SpiderCategory.lol.getValue());
+        article.setSourceType(SourceType.duowan.getValue());
+        article.setSourceUrl(spiderArticle.getSourceUrl());
+        article.setTitle(spiderArticle.getTitle());
+        article.setPostTime(null);
+        article.setContentId(articleContent.getId());
+        article.setPageView(0);
+        article.setIsDeleted(false);
+        article.setCreateTime(date);
+        article.setLastUpdateTime(date);
+        articleService.insert(article);
+        logger.info("save duowan article:{}", spiderArticle);
+
     }
 
 
@@ -113,4 +150,6 @@ public class Web87GTxManager {
     public void setVideoService(VideoService videoService) {
         this.videoService = videoService;
     }
+
+
 }

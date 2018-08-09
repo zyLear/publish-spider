@@ -3,6 +3,8 @@ package com.zylear.publish.spider.manager;
 import com.zylear.publish.spider.manager.bean.PostBean;
 import com.zylear.publish.spider.util.JsonUtil;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
 import java.io.IOException;
@@ -11,10 +13,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by xiezongyu on 2018/8/8.
  */
+@Component
 public class PublishWebManager {
 
-    private String host = "";
-    private String uri = "";
+    @Value("${publish.web.host}")
+    private String host;
+    private String uri = "/admin/submit-article";
 
     public void postArticle(PostBean postBean) {
 
@@ -33,7 +37,7 @@ public class PublishWebManager {
                 , jsonStrign);
 
         Request request = new Request.Builder()
-                .url("url")//请求的url
+                .url(url)//请求的url
                 .post(requestBody)
                 .build();
 

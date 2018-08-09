@@ -1,5 +1,6 @@
 package com.zylear.publish.spider.controller;
 
+import com.zylear.publish.spider.robot.duowan.DuowanSpiderManager;
 import com.zylear.publish.spider.robot.web87g.Web87GSpiderManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,29 +15,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SpiderController {
 
     private Web87GSpiderManager web87GSpiderManager;
+    private DuowanSpiderManager duowanSpiderManager;
 
-    @RequestMapping("/87g/article")
     @ResponseBody
+    @RequestMapping("/87g/article")
     public String control() {
-
-
         web87GSpiderManager.start();
-
         return "ok";
     }
 
-    @RequestMapping("/87g/video")
     @ResponseBody
+    @RequestMapping("/87g/video")
     public String controlVideo() {
-
-
         web87GSpiderManager.startVideo();
+        return "ok";
+    }
 
+    @ResponseBody
+    @RequestMapping("/duowan/article")
+    public String startArticle() {
+        duowanSpiderManager.startArticle();
         return "ok";
     }
 
     @Autowired
     public void setWeb87GSpiderManager(Web87GSpiderManager web87GSpiderManager) {
         this.web87GSpiderManager = web87GSpiderManager;
+    }
+
+    @Autowired
+    public void setDuowanSpiderManager(DuowanSpiderManager duowanSpiderManager) {
+        this.duowanSpiderManager = duowanSpiderManager;
     }
 }

@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="source_type" property="sourceType" jdbcType="TINYINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="article_category" property="articleCategory" jdbcType="TINYINT" />
+    <result column="article_category" property="spiderCategory" jdbcType="TINYINT" />
     <result column="post_time" property="postTime" jdbcType="TIMESTAMP" />
     <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
     <result column="content_id" property="contentId" jdbcType="INTEGER" />
@@ -38,7 +38,7 @@
       page_view, is_deleted, submit_time, 
       create_time, last_update_time)
     values (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, 
-      #{articleCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP}, #{sourceUrl,jdbcType=VARCHAR}, 
+      #{spiderCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP}, #{sourceUrl,jdbcType=VARCHAR},
       #{contentId,jdbcType=INTEGER}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=TINYINT}, 
       #{pageView,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{submitTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP})
@@ -55,7 +55,7 @@
       <if test="title != null" >
         title,
       </if>
-      <if test="articleCategory != null" >
+      <if test="spiderCategory != null" >
         article_category,
       </if>
       <if test="postTime != null" >
@@ -99,8 +99,8 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="articleCategory != null" >
-        #{articleCategory,jdbcType=TINYINT},
+      <if test="spiderCategory != null" >
+        #{spiderCategory,jdbcType=TINYINT},
       </if>
       <if test="postTime != null" >
         #{postTime,jdbcType=TIMESTAMP},
@@ -143,8 +143,8 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="articleCategory != null" >
-        article_category = #{articleCategory,jdbcType=TINYINT},
+      <if test="spiderCategory != null" >
+        article_category = #{spiderCategory,jdbcType=TINYINT},
       </if>
       <if test="postTime != null" >
         post_time = #{postTime,jdbcType=TIMESTAMP},
@@ -183,7 +183,7 @@
     update t_video
     set source_type = #{sourceType,jdbcType=TINYINT},
       title = #{title,jdbcType=VARCHAR},
-      article_category = #{articleCategory,jdbcType=TINYINT},
+      article_category = #{spiderCategory,jdbcType=TINYINT},
       post_time = #{postTime,jdbcType=TIMESTAMP},
       source_url = #{sourceUrl,jdbcType=VARCHAR},
       content_id = #{contentId,jdbcType=INTEGER},
