@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
--- 主机:                           127.0.0.1
--- 服务器版本:                        5.5.59 - MySQL Community Server (GPL)
+-- 主机:                           localhost
+-- 服务器版本:                        5.7.17-log - MySQL Community Server (GPL)
 -- 服务器操作系统:                      Win64
 -- HeidiSQL 版本:                  9.3.0.4984
 -- --------------------------------------------------------
@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `t_video` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `source_type` tinyint(4) NOT NULL,
   `title` varchar(256) NOT NULL,
+  `cover_img_url` varchar(1024) NOT NULL,
   `article_category` tinyint(4) NOT NULL,
   `post_time` datetime DEFAULT NULL,
   `source_url` varchar(1024) NOT NULL,

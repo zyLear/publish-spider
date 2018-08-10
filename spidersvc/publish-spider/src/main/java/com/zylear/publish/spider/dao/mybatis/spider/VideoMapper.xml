@@ -16,13 +16,14 @@
     <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="cover_img_url" property="coverImgUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, source_type, title, article_category, post_time, source_url, content_id, video_source, 
+    id, source_type, title, article_category, post_time, source_url, content_id, video_source,
     video_type, page_view, is_deleted, submit_time, create_time, last_update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_video
     where id = #{id,jdbcType=INTEGER}
@@ -32,15 +33,15 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zylear.publish.spider.domain.Video" >
-    insert into t_video (id, source_type, title, 
-      article_category, post_time, source_url, 
-      content_id, video_source, video_type, 
-      page_view, is_deleted, submit_time, 
+    insert into t_video (id, source_type, title,
+      article_category, post_time, source_url,
+      content_id, video_source, video_type,
+      page_view, is_deleted, submit_time,
       create_time, last_update_time)
-    values (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR},
       #{spiderCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP}, #{sourceUrl,jdbcType=VARCHAR},
-      #{contentId,jdbcType=INTEGER}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=TINYINT}, 
-      #{pageView,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{contentId,jdbcType=INTEGER}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=TINYINT},
+      #{pageView,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{submitTime,jdbcType=TIMESTAMP},
       #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zylear.publish.spider.domain.Video" >
