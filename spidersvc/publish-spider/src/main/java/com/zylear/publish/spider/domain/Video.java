@@ -31,6 +31,16 @@ public class Video {
 
     private Date lastUpdateTime;
 
+    private String coverImgUrl;
+
+    public String getCoverImgUrl() {
+        return coverImgUrl;
+    }
+
+    public void setCoverImgUrl(String coverImgUrl) {
+        this.coverImgUrl = coverImgUrl;
+    }
+
     public Integer getId() {
         return id;
     }
