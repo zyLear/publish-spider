@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,8 +22,8 @@ public class SubmitManager {
     private ArticleContentService articleContentService;
     private PublishWebManager publishWebManager;
 
-    @PostConstruct
-    public void init() {
+    //    @PostConstruct
+    public void submit() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -31,12 +32,12 @@ public class SubmitManager {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                submit();
+                submitArticle();
             }
         }).start();
     }
 
-    public void submit() {
+    private void submitArticle() {
         List<Article> articles = articleService.findAll();
         for (Article article : articles) {
 
@@ -52,6 +53,13 @@ public class SubmitManager {
             postBean.setSpiderCategory(article.getSpiderCategory());
             postBean.setSourceUrl(article.getSourceUrl());
             postBean.setCss(articleContent.getCss());
+            Date postTime = article.getPostTime();
+            if (postTime == null) {
+                postBean.setPostTime(0L);
+            } else {
+                postBean.setPostTime(article.getPostTime().getTime());
+            }
+
             postBean.setContent(articleContent.getContent());
             publishWebManager.postArticle(postBean);
         }
