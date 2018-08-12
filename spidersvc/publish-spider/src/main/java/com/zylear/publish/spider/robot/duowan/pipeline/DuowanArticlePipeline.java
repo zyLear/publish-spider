@@ -1,5 +1,7 @@
 package com.zylear.publish.spider.robot.duowan.pipeline;
 
+import com.zylear.publish.spider.enums.SourceType;
+import com.zylear.publish.spider.enums.SpiderCategory;
 import com.zylear.publish.spider.manager.SpiderTxManager;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
 import com.zylear.publish.spider.robot.web87g.pipeline.Web87GPipeline;
@@ -15,7 +17,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
  * Created by xiezongyu on 2018/8/8.
  */
 @Component
-public class DuowanArticlePipeline implements Pipeline{
+public class DuowanArticlePipeline implements Pipeline {
 
 
     private static final Logger logger = LoggerFactory.getLogger(Web87GPipeline.class);
@@ -27,7 +29,7 @@ public class DuowanArticlePipeline implements Pipeline{
     public void process(ResultItems resultItems, Task task) {
         SpiderArticle article = resultItems.get("article");
         if (article != null) {
-            spiderTxManager.saveDuowanArticle(article);
+            spiderTxManager.saveArticle(article, SourceType.duowan.getValue(), SpiderCategory.lol.getValue());
         }
 
     }

@@ -8,7 +8,9 @@ public enum VideoType {
     unknown(-1),
     source_url(1),
     iframe(2),
-    comtent_html(3);
+    content_html(3),
+    embed(4)
+    ;
 
 
     VideoType(Integer value) {

@@ -3,6 +3,7 @@ package com.zylear.publish.spider.dao.mybatis.spider;
 import com.zylear.publish.spider.domain.Article;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ArticleMapper {
@@ -23,4 +24,9 @@ public interface ArticleMapper {
                                      @Param("title") String title);
 
     List<Article> findAll();
+
+    void updateAfterSubmit(
+            @Param("id") Integer id,
+            @Param("refId") Integer refId,
+            @Param("submitTime") Date submitTime);
 }

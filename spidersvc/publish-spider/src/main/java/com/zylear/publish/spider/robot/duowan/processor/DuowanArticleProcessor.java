@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class DuowanArticleProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(5000);
-    private String itemListRegrex = "http://lol\\.duowan\\.com/tag/131563991792_\\d\\.html|http://lol\\.duowan\\.com/tag/131563991792\\.html";
+    private String itemListRegrex = "http://lol\\.duowan\\.com/tag/131563991792_\\d+\\.html|http://lol\\.duowan\\.com/tag/131563991792\\.html";
     private Pattern pattern = Pattern.compile(itemListRegrex);
 
     @Override
@@ -34,7 +34,7 @@ public class DuowanArticleProcessor implements PageProcessor {
         Matcher matcher = pattern.matcher(page.getUrl().toString());
         if (matcher.matches()) {
             List<String> all = page.getHtml().xpath("//div[@class='ZQ-row']//ul[@class='m-list']//li/a/@href").all();
-            List<String> list = page.getHtml().links().regex(".*//lol\\.duowan\\.com/tag/131563991792_\\d\\.html").all();
+            List<String> list = page.getHtml().links().regex(".*//lol\\.duowan\\.com/tag/131563991792_\\d+\\.html").all();
             page.addTargetRequests(all);
             page.addTargetRequests(list);
             page.getResultItems().setSkip(true);

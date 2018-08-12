@@ -2,6 +2,7 @@ package com.zylear.publish.spider.service.pubilsh;
 
 import com.zylear.publish.spider.domain.Article;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,4 +16,6 @@ public interface ArticleService {
     Article findBySourceTypeAndTitle(Integer sourceType, String title);
 
     List<Article> findAll();
+
+    void updateAfterSubmit(Integer id, Integer refId, Date date);
 }

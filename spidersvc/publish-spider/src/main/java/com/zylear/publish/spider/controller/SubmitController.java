@@ -19,7 +19,24 @@ public class SubmitController {
     @ResponseBody
     @RequestMapping("/article")
     public String startArticle() {
-        submitManager.submit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                submitManager.submitArticle();
+            }
+        }).start();
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/video")
+    public String startVideo() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                submitManager.submitVideo();
+            }
+        }).start();
         return "ok";
     }
 

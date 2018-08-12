@@ -1,213 +1,224 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zylear.publish.spider.dao.mybatis.spider.VideoMapper" >
-  <resultMap id="BaseResultMap" type="com.zylear.publish.spider.domain.Video" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="source_type" property="sourceType" jdbcType="TINYINT" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="article_category" property="spiderCategory" jdbcType="TINYINT" />
-    <result column="post_time" property="postTime" jdbcType="TIMESTAMP" />
-    <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
-    <result column="content_id" property="contentId" jdbcType="INTEGER" />
-    <result column="video_source" property="videoSource" jdbcType="VARCHAR" />
-    <result column="video_type" property="videoType" jdbcType="TINYINT" />
-    <result column="page_view" property="pageView" jdbcType="INTEGER" />
-    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
-    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
-    <result column="cover_img_url" property="coverImgUrl" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, source_type, title, article_category, post_time, source_url, content_id, video_source,
-    video_type, page_view, is_deleted, submit_time, create_time, last_update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from t_video
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_video
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.zylear.publish.spider.domain.Video" >
-    insert into t_video (id, source_type, title,
-      article_category, post_time, source_url,
-      content_id, video_source, video_type,
-      page_view, is_deleted, submit_time,
-      create_time, last_update_time)
-    values (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR},
-      #{spiderCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP}, #{sourceUrl,jdbcType=VARCHAR},
-      #{contentId,jdbcType=INTEGER}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=TINYINT},
-      #{pageView,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{submitTime,jdbcType=TIMESTAMP},
-      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.zylear.publish.spider.domain.Video" >
-    insert into t_video
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="sourceType != null" >
-        source_type,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="spiderCategory != null" >
-        article_category,
-      </if>
-      <if test="postTime != null" >
-        post_time,
-      </if>
-      <if test="sourceUrl != null" >
-        source_url,
-      </if>
-      <if test="contentId != null" >
-        content_id,
-      </if>
-      <if test="videoSource != null" >
-        video_source,
-      </if>
-      <if test="videoType != null" >
-        video_type,
-      </if>
-      <if test="pageView != null" >
-        page_view,
-      </if>
-      <if test="isDeleted != null" >
-        is_deleted,
-      </if>
-      <if test="submitTime != null" >
-        submit_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="lastUpdateTime != null" >
-        last_update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="sourceType != null" >
-        #{sourceType,jdbcType=TINYINT},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderCategory != null" >
-        #{spiderCategory,jdbcType=TINYINT},
-      </if>
-      <if test="postTime != null" >
-        #{postTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sourceUrl != null" >
-        #{sourceUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="contentId != null" >
-        #{contentId,jdbcType=INTEGER},
-      </if>
-      <if test="videoSource != null" >
-        #{videoSource,jdbcType=VARCHAR},
-      </if>
-      <if test="videoType != null" >
-        #{videoType,jdbcType=TINYINT},
-      </if>
-      <if test="pageView != null" >
-        #{pageView,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null" >
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-      <if test="submitTime != null" >
-        #{submitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastUpdateTime != null" >
-        #{lastUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zylear.publish.spider.domain.Video" >
-    update t_video
-    <set >
-      <if test="sourceType != null" >
-        source_type = #{sourceType,jdbcType=TINYINT},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="spiderCategory != null" >
-        article_category = #{spiderCategory,jdbcType=TINYINT},
-      </if>
-      <if test="postTime != null" >
-        post_time = #{postTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sourceUrl != null" >
-        source_url = #{sourceUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="contentId != null" >
-        content_id = #{contentId,jdbcType=INTEGER},
-      </if>
-      <if test="videoSource != null" >
-        video_source = #{videoSource,jdbcType=VARCHAR},
-      </if>
-      <if test="videoType != null" >
-        video_type = #{videoType,jdbcType=TINYINT},
-      </if>
-      <if test="pageView != null" >
-        page_view = #{pageView,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null" >
-        is_deleted = #{isDeleted,jdbcType=TINYINT},
-      </if>
-      <if test="submitTime != null" >
-        submit_time = #{submitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastUpdateTime != null" >
-        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zylear.publish.spider.domain.Video" >
-    update t_video
-    set source_type = #{sourceType,jdbcType=TINYINT},
-      title = #{title,jdbcType=VARCHAR},
-      article_category = #{spiderCategory,jdbcType=TINYINT},
-      post_time = #{postTime,jdbcType=TIMESTAMP},
-      source_url = #{sourceUrl,jdbcType=VARCHAR},
-      content_id = #{contentId,jdbcType=INTEGER},
-      video_source = #{videoSource,jdbcType=VARCHAR},
-      video_type = #{videoType,jdbcType=TINYINT},
-      page_view = #{pageView,jdbcType=INTEGER},
-      is_deleted = #{isDeleted,jdbcType=TINYINT},
-      submit_time = #{submitTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.zylear.publish.spider.dao.mybatis.spider.VideoMapper">
+    <resultMap id="BaseResultMap" type="com.zylear.publish.spider.domain.Video">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="video_category" property="videoCategory" jdbcType="TINYINT"/>
+        <result column="post_time" property="postTime" jdbcType="TIMESTAMP"/>
+        <result column="source_url" property="sourceUrl" jdbcType="VARCHAR"/>
+        <result column="content_id" property="contentId" jdbcType="INTEGER"/>
+        <result column="video_source" property="videoSource" jdbcType="VARCHAR"/>
+        <result column="video_type" property="videoType" jdbcType="TINYINT"/>
+        <result column="page_view" property="pageView" jdbcType="INTEGER"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="cover_img_url" property="coverImgUrl" jdbcType="VARCHAR"/>
+        <result column="flashvars" property="flashvars" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, source_type, title, video_category, post_time, source_url, content_id, video_source,
+        video_type, page_view, is_deleted, submit_time, create_time, last_update_time, cover_img_url, flashvars
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_video
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM t_video
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.zylear.publish.spider.domain.Video">
+        insert into t_video (<include refid="Base_Column_List"/>)
+        values (#{id,jdbcType=INTEGER}, #{sourceType,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR},
+        #{videoCategory,jdbcType=TINYINT}, #{postTime,jdbcType=TIMESTAMP}, #{sourceUrl,jdbcType=VARCHAR},
+        #{contentId,jdbcType=INTEGER}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=TINYINT},
+        #{pageView,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{submitTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP},#{coverImgUrl,jdbcType=VARCHAR},
+        #{flashvars,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zylear.publish.spider.domain.Video">
+        insert into t_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="videoCategory != null">
+                video_category,
+            </if>
+            <if test="postTime != null">
+                post_time,
+            </if>
+            <if test="sourceUrl != null">
+                source_url,
+            </if>
+            <if test="contentId != null">
+                content_id,
+            </if>
+            <if test="videoSource != null">
+                video_source,
+            </if>
+            <if test="videoType != null">
+                video_type,
+            </if>
+            <if test="pageView != null">
+                page_view,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="submitTime != null">
+                submit_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="videoCategory != null">
+                #{videoCategory,jdbcType=TINYINT},
+            </if>
+            <if test="postTime != null">
+                #{postTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sourceUrl != null">
+                #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                #{contentId,jdbcType=INTEGER},
+            </if>
+            <if test="videoSource != null">
+                #{videoSource,jdbcType=VARCHAR},
+            </if>
+            <if test="videoType != null">
+                #{videoType,jdbcType=TINYINT},
+            </if>
+            <if test="pageView != null">
+                #{pageView,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="submitTime != null">
+                #{submitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zylear.publish.spider.domain.Video">
+        update t_video
+        <set>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="videoCategory != null">
+                video_category = #{videoCategory,jdbcType=TINYINT},
+            </if>
+            <if test="postTime != null">
+                post_time = #{postTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sourceUrl != null">
+                source_url = #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                content_id = #{contentId,jdbcType=INTEGER},
+            </if>
+            <if test="videoSource != null">
+                video_source = #{videoSource,jdbcType=VARCHAR},
+            </if>
+            <if test="videoType != null">
+                video_type = #{videoType,jdbcType=TINYINT},
+            </if>
+            <if test="pageView != null">
+                page_view = #{pageView,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="submitTime != null">
+                submit_time = #{submitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zylear.publish.spider.domain.Video">
+        UPDATE t_video
+        SET source_type      = #{sourceType,jdbcType=TINYINT},
+            title            = #{title,jdbcType=VARCHAR},
+            video_category   = #{videoCategory,jdbcType=TINYINT},
+            post_time        = #{postTime,jdbcType=TIMESTAMP},
+            source_url       = #{sourceUrl,jdbcType=VARCHAR},
+            content_id       = #{contentId,jdbcType=INTEGER},
+            video_source     = #{videoSource,jdbcType=VARCHAR},
+            video_type       = #{videoType,jdbcType=TINYINT},
+            page_view        = #{pageView,jdbcType=INTEGER},
+            is_deleted       = #{isDeleted,jdbcType=TINYINT},
+            submit_time      = #{submitTime,jdbcType=TIMESTAMP},
+            create_time      = #{createTime,jdbcType=TIMESTAMP},
+            last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <select id="findBySourceTypeAndTitle" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM t_video
-    WHERE
-    source_type =#{sourceType,jdbcType=TINYINT}
-    AND title = #{title,jdbcType=VARCHAR}
-    AND is_deleted = 0
+    <select id="findBySourceTypeAndTitle" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_video
+        WHERE
+        source_type =#{sourceType,jdbcType=TINYINT}
+        AND title = #{title,jdbcType=VARCHAR}
+        AND is_deleted = 0
+    </select>
 
-  </select>
+    <update id="updateAfterSubmit">
+        UPDATE t_video
+        SET ref_id      = #{refId,jdbcType=VARCHAR},
+        submit_time = #{submitTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 
+    <select id="findNeedSubmitVideos" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_video
+        WHERE submit_time is NULL
+        AND is_deleted = 0
+    </select>
 
 </mapper>

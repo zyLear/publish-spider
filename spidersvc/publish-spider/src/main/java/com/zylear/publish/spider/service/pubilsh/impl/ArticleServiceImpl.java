@@ -6,6 +6,7 @@ import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findAll() {
         return articleMapper.findAll();
+    }
+
+    @Override
+    public void updateAfterSubmit(Integer id, Integer refId, Date date) {
+        articleMapper.updateAfterSubmit(id, refId, date);
     }
 
 }

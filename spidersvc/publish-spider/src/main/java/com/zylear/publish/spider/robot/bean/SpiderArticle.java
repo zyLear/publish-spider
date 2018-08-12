@@ -13,6 +13,8 @@ public class SpiderArticle {
         this.css = css;
         this.sourceUrl = sourceUrl;
         this.postTime = postTime;
+
+
     }
 
     public SpiderArticle(String title, String content, String css, String sourceUrl) {
@@ -28,6 +30,35 @@ public class SpiderArticle {
     private String sourceUrl;
 
     private String postTime;
+
+//    private String coverImgUrl;
+//    private String videoSource;
+
+//    public SpiderArticle(String title,String css, String sourceUrl, String postTime, String coverImgUrl, String videoSource) {
+//        this.title = title;
+////        this.content = content;
+//        this.css = css;
+//        this.sourceUrl = sourceUrl;
+//        this.postTime = postTime;
+//        this.coverImgUrl = coverImgUrl;
+//        this.videoSource = videoSource;
+//    }
+
+//    public String getCoverImgUrl() {
+//        return coverImgUrl;
+//    }
+//
+//    public void setCoverImgUrl(String coverImgUrl) {
+//        this.coverImgUrl = coverImgUrl;
+//    }
+//
+//    public String getVideoSource() {
+//        return videoSource;
+//    }
+//
+//    public void setVideoSource(String videoSource) {
+//        this.videoSource = videoSource;
+//    }
 
     public String getPostTime() {
         return postTime;

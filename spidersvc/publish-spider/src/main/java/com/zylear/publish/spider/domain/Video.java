@@ -9,7 +9,7 @@ public class Video {
 
     private String title;
 
-    private Integer articleCategory;
+    private Integer videoCategory;
 
     private Date postTime;
 
@@ -32,6 +32,16 @@ public class Video {
     private Date lastUpdateTime;
 
     private String coverImgUrl;
+
+    private String flashvars;
+
+    public String getFlashvars() {
+        return flashvars;
+    }
+
+    public void setFlashvars(String flashvars) {
+        this.flashvars = flashvars;
+    }
 
     public String getCoverImgUrl() {
         return coverImgUrl;
@@ -65,12 +75,12 @@ public class Video {
         this.title = title;
     }
 
-    public Integer getArticleCategory() {
-        return articleCategory;
+    public Integer getVideoCategory() {
+        return videoCategory;
     }
 
-    public void setArticleCategory(Integer articleCategory) {
-        this.articleCategory = articleCategory;
+    public void setVideoCategory(Integer videoCategory) {
+        this.videoCategory = videoCategory;
     }
 
     public Date getPostTime() {

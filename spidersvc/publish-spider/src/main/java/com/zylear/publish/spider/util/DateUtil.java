@@ -14,6 +14,7 @@ public class DateUtil {
     private static final Logger logger = LoggerFactory.getLogger(DateUtil.class);
 
     private final static String YMDHMS = "yyyy-MM-dd HH:mm:ss";
+    private final static String YMDHM = "yyyy-MM-dd HH:mm";
     private final static String YMD = "yyyy-MM-dd";
     private final static String YMD_COMPACT = "yyyyMMdd";
 
@@ -39,6 +40,16 @@ public class DateUtil {
         } catch (Exception e) {
             logger.info("getDateFromYDMHMS fail. string:{}", string, e);
             throw new RuntimeException("getDateFromYDMHMS fail. string:" + string, e);
+        }
+    }
+
+    public static Date getDateFromYDMHM(String string) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(YMDHM);
+            return formatter.parse(string.trim());
+        } catch (Exception e) {
+            logger.info("getDateFromYDMHM fail. string:{}", string, e);
+            throw new RuntimeException("getDateFromYDMHM fail. string:" + string, e);
         }
     }
 
