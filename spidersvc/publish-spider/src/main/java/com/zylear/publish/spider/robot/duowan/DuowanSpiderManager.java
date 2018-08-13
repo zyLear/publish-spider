@@ -1,7 +1,9 @@
 package com.zylear.publish.spider.robot.duowan;
 
 import com.zylear.publish.spider.robot.duowan.pipeline.DuowanArticlePipeline;
+import com.zylear.publish.spider.robot.duowan.pipeline.DuowanVideoPipeline;
 import com.zylear.publish.spider.robot.duowan.processor.DuowanArticleProcessor;
+import com.zylear.publish.spider.robot.duowan.processor.DuowanVideoProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
@@ -15,15 +17,18 @@ public class DuowanSpiderManager {
     private DuowanArticleProcessor duowanArticleProcessor;
     private DuowanArticlePipeline duowanArticlePipeline;
 
+    private DuowanVideoProcessor duowanVideoProcessor;
+    private DuowanVideoPipeline duowanVideoPipeline;
 
-//    public void startVideo() {
-//        Spider.create(web87GVideoProcessor)
-//                .addPipeline(web87GVideoPipeline)
-//                .addUrl("http://www.87g.com/pg/shipin/")
-//                .setExitWhenComplete(true)
-//                .thread(3)
-//                .runAsync();
-//    }
+
+    public void startVideo() {
+        Spider.create(duowanVideoProcessor)
+                .addPipeline(duowanVideoPipeline)
+                .addUrl("http://video.duowan.com/lol/yule.html")
+                .setExitWhenComplete(true)
+                .thread(3)
+                .runAsync();
+    }
 
     public void startArticle() {
         Spider.create(duowanArticleProcessor)
@@ -42,5 +47,15 @@ public class DuowanSpiderManager {
     @Autowired
     public void setDuowanArticlePipeline(DuowanArticlePipeline duowanArticlePipeline) {
         this.duowanArticlePipeline = duowanArticlePipeline;
+    }
+
+    @Autowired
+    public void setDuowanVideoProcessor(DuowanVideoProcessor duowanVideoProcessor) {
+        this.duowanVideoProcessor = duowanVideoProcessor;
+    }
+
+    @Autowired
+    public void setDuowanVideoPipeline(DuowanVideoPipeline duowanVideoPipeline) {
+        this.duowanVideoPipeline = duowanVideoPipeline;
     }
 }

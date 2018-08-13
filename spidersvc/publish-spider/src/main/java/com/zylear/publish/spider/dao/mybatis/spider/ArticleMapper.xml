@@ -182,4 +182,19 @@
         WHERE is_deleted=0
     </select>
 
+    <update id="updateAfterSubmit">
+        UPDATE t_article
+        SET ref_id      = #{refId,jdbcType=VARCHAR},
+            submit_time = #{submitTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findNeedSubmitArticles" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_article
+        WHERE submit_time is NULL
+        AND is_deleted = 0
+    </select>
+
 </mapper>

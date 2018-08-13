@@ -1,7 +1,11 @@
 package com.zylear.publish.spider.robot.web87g.pipeline;
 
+import com.zylear.publish.spider.enums.SourceType;
+import com.zylear.publish.spider.enums.SpiderCategory;
+import com.zylear.publish.spider.enums.VideoType;
 import com.zylear.publish.spider.manager.SpiderTxManager;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
+import com.zylear.publish.spider.robot.bean.SpiderVideo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
@@ -18,9 +22,9 @@ public class Web87GVideoPipeline implements Pipeline {
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        SpiderArticle article = resultItems.get("article");
-        if (article != null) {
-            spiderTxManager.saveVideo(article);
+        SpiderVideo video = resultItems.get("video");
+        if (video != null) {
+            spiderTxManager.saveVideo(VideoType.content_html.getValue(), SourceType.web_78g.getValue(), SpiderCategory.pubg.getValue(), video);
 //            System.out.println(article);
         }
 

@@ -1,4 +1,4 @@
-package com.zylear.publish.spider.robot.web87g.processor;
+package com.zylear.publish.spider.robot.yxdown.processor;
 
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
 import org.springframework.stereotype.Component;
@@ -13,13 +13,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by xiezongyu on 2018/8/5.
+ * Created by xiezongyu on 2018/8/8.
  */
 @Component
-public class Web87GProcessor implements PageProcessor {
+public class YxdownPubgArticleProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(5000);
-    private String itemListRegrex = "http://www\\.87g\\.com/pg/gonglue/index_\\d+\\.html|http://www\\.87g\\.com/pg/gonglue/";
+    private String itemListRegrex = "http://www\\.yxdown\\.com/z/jdqscjzcsy/gl/|http://www.yxdown.com/z/jdqscjzcsy/gl/\\d+/";
     private Pattern pattern = Pattern.compile(itemListRegrex);
 
     @Override
@@ -29,35 +29,33 @@ public class Web87GProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-//        GithubRepoPageProcessor
+
         Matcher matcher = pattern.matcher(page.getUrl().toString());
         if (matcher.matches()) {
-            List<String> all = page.getHtml().links().regex(".*//www.87g.com/pg/\\d+\\.html").all();
-            List<String> list = page.getHtml().links().regex(".*//www.87g.com/pg/gonglue/index_\\d+\\.html").all();
+            List<String> all = page.getHtml().xpath("//div[@class='cbox']/div[@class='list_L']/ul/li//a/@href").all();
+            List<String> list = page.getHtml().links().regex(".*//www\\.yxdown\\.com/z/jdqscjzcsy/gl/\\d+/").all();
             page.addTargetRequests(all);
             page.addTargetRequests(list);
             page.getResultItems().setSkip(true);
         } else {
-            Selectable selectable = page.getHtml().xpath("//link[@rel='stylesheet']");
-            String title = page.getHtml().xpath("//div[@class='m-article']/h1/text()").toString();
 
+            Selectable selectable = page.getHtml().xpath("//link[@rel='stylesheet']");
             StringBuilder css = new StringBuilder("");
             for (Selectable node : selectable.nodes()) {
                 css.append(node);
             }
-            String content = page.getHtml().xpath("//div[@class='m-article']/div[@class='cont']").toString();
-            String postTime = page.getHtml().xpath("//div[@class='m-article']/div[@class='info']/span[1]/text()").toString();
+            String title = page.getHtml().xpath("//div[@class='news_l']/div[@class='news']/h1/text()").toString();
+
+            String content = page.getHtml().xpath("//div[@id='content']").toString();
+            String postTime = page.getHtml().xpath("//div[@class='news_l']/div[@class='news']/div[@class='intro']/span[1]/text()").toString();
             SpiderArticle article = new SpiderArticle(title, content, css.toString(), page.getUrl().toString(), postTime);
             page.putField("article", article);
 
         }
-
     }
 
     public static void main(String[] args) {
-        Spider.create(new Web87GProcessor()).addUrl("http://www.87g.com/pg/gonglue/").run();
-
+        Spider.create(new YxdownPubgArticleProcessor()).addUrl("http://www.yxdown.com/z/jdqscjzcsy/gl/").run();
     }
-
 
 }

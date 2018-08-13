@@ -7,6 +7,9 @@ import com.zylear.publish.spider.service.pubilsh.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by xiezongyu on 2018/8/7.
  */
@@ -23,6 +26,16 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public void insert(Video video) {
         videoMapper.insert(video);
+    }
+
+    @Override
+    public List<Video> findNeedSubmitVideos() {
+        return videoMapper.findNeedSubmitVideos();
+    }
+
+    @Override
+    public void updateAfterSubmit(Integer id, Integer refId, Date date) {
+        videoMapper.updateAfterSubmit(id, refId, date);
     }
 
     @Autowired

@@ -32,11 +32,8 @@ public class Web87GVideoProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-//        GithubRepoPageProcessor
         Matcher matcher = pattern.matcher(page.getUrl().toString());
         if (matcher.matches()) {
-//            page.getHtml().xpath("//ul[@class='ul-news']//div[@class='item']//div[@class='txt']/a").toString()
-//            List<String> all = page.getHtml().links().regex(".*//www.87g.com/pg/\\d+\\.html").all();
 
             List<String> all = page.getHtml().xpath("//ul[@class='ul-news']//div[@class='txt']/h4/a/@href").all();
             List<String> list = page.getHtml().links().regex(".*//www.87g.com/pg/shipin/index_\\d+\\.html").all();
@@ -44,7 +41,6 @@ public class Web87GVideoProcessor implements PageProcessor {
             page.addTargetRequests(list);
             page.getResultItems().setSkip(true);
         } else {
-//            System.out.println(page.getHtml().getDocument().toString());
             Selectable selectable = page.getHtml().xpath("//link[@rel='stylesheet']");
             String title = page.getHtml().xpath("//div[contains(@class,'news-cont') or contains(@class,'m-article')]/h1/text()").toString();
 
@@ -52,9 +48,8 @@ public class Web87GVideoProcessor implements PageProcessor {
             for (Selectable node : selectable.nodes()) {
                 css.append(node);
             }
-//            System.out.println("css :" + css);
+            String postTime = page.getHtml().xpath("//div[@class='m-article']/div[@class='info']/span[1]/text()").toString();
             String content = page.getHtml().xpath("//div[contains(@class,'news-cont') or contains(@class,'m-article')]//div[contains(@class,'news-content') or contains(@class,'cont')]").toString();
-//            System.out.println("show s content:" + xpath);
             SpiderArticle article = new SpiderArticle(title, content, css.toString(), page.getUrl().toString());
             page.putField("article", article);
 

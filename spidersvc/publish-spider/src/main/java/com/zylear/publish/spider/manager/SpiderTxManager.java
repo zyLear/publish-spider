@@ -8,6 +8,7 @@ import com.zylear.publish.spider.enums.SourceType;
 import com.zylear.publish.spider.enums.SpiderCategory;
 import com.zylear.publish.spider.enums.VideoType;
 import com.zylear.publish.spider.robot.bean.SpiderArticle;
+import com.zylear.publish.spider.robot.bean.SpiderVideo;
 import com.zylear.publish.spider.service.pubilsh.ArticleContentService;
 import com.zylear.publish.spider.service.pubilsh.ArticleService;
 import com.zylear.publish.spider.service.pubilsh.VideoService;
@@ -32,13 +33,13 @@ public class SpiderTxManager {
     private ArticleContentService articleContentService;
     private VideoService videoService;
 
-    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
-    public void save87GArticle(SpiderArticle spiderArticle) {
 
-        Article exist = articleService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
+    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
+    public void saveArticle(SpiderArticle spiderArticle, Integer sourceType, Integer spiderCategory) {
+        Article exist = articleService.findBySourceTypeAndTitle(sourceType, spiderArticle.getTitle());
 
         if (exist != null) {
-            logger.info("article exist. sourceType:{} title:{}", SourceType.web_78g.getValue(), spiderArticle.getTitle());
+            logger.info("article exist. sourceType:{} title:{}", SourceType.valueOf(sourceType), spiderArticle.getTitle());
             return;
         }
 
@@ -51,89 +52,185 @@ public class SpiderTxManager {
         articleContent.setLastUpdateTime(date);
         articleContentService.insert(articleContent);
 
+
         Article article = new Article();
-        article.setSpiderCategory(SpiderCategory.pubg.getValue());
-        article.setSourceType(SourceType.web_78g.getValue());
+        article.setSpiderCategory(spiderCategory);
+        article.setSourceType(sourceType);
         article.setSourceUrl(spiderArticle.getSourceUrl());
         article.setTitle(spiderArticle.getTitle());
-        article.setPostTime(null);
+        article.setPostTime(getPostTimeDate(sourceType, spiderArticle.getPostTime()));
         article.setContentId(articleContent.getId());
         article.setPageView(0);
         article.setIsDeleted(false);
         article.setCreateTime(date);
         article.setLastUpdateTime(date);
         articleService.insert(article);
-        logger.info("save article:{}", spiderArticle);
-
+        logger.info("save souceType:{} article:{}", SourceType.valueOf(sourceType), spiderArticle);
     }
 
+
+//    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
+//    public void save87GArticle(SpiderArticle spiderArticle) {
+//
+//        Article exist = articleService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
+//
+//        if (exist != null) {
+//            logger.info("article exist. sourceType:{} title:{}", SourceType.web_78g.getValue(), spiderArticle.getTitle());
+//            return;
+//        }
+//
+//        Date date = new Date();
+//        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
+//        articleContent.setCss(spiderArticle.getCss());
+//        articleContent.setContent(spiderArticle.getContent());
+//        articleContent.setIsDeleted(false);
+//        articleContent.setCreateTime(date);
+//        articleContent.setLastUpdateTime(date);
+//        articleContentService.insert(articleContent);
+//
+//        Article article = new Article();
+//        article.setSpiderCategory(SpiderCategory.pubg.getValue());
+//        article.setSourceType(SourceType.web_78g.getValue());
+//        article.setSourceUrl(spiderArticle.getSourceUrl());
+//        article.setTitle(spiderArticle.getTitle());
+//        article.setPostTime(DateUtil.getDateFromYDMHMS(spiderArticle.getPostTime()));
+//        article.setContentId(articleContent.getId());
+//        article.setPageView(0);
+//        article.setIsDeleted(false);
+//        article.setCreateTime(date);
+//        article.setLastUpdateTime(date);
+//        articleService.insert(article);
+//        logger.info("save article:{}", spiderArticle);
+//
+//    }
+
+//    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
+//    public void saveVideo(SpiderArticle spiderArticle) {
+//        Video exist = videoService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
+//
+//        if (exist != null) {
+//            logger.info("video exist. sourceType:{} title:{}", SourceType.web_78g.getValue(), spiderArticle.getTitle());
+//            return;
+//        }
+//
+//        Date date = new Date();
+//        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
+//        articleContent.setCss(spiderArticle.getCss());
+//        articleContent.setContent(spiderArticle.getContent());
+//        articleContent.setIsDeleted(false);
+//        articleContent.setCreateTime(date);
+//        articleContent.setLastUpdateTime(date);
+//        articleContentService.insert(articleContent);
+//
+//        Video video = new Video();
+//        video.setVideoCategory(SpiderCategory.pubg.getValue());
+//        video.setSourceType(SourceType.web_78g.getValue());
+//        video.setSourceUrl(spiderArticle.getSourceUrl());
+//        video.setTitle(spiderArticle.getTitle());
+//        video.setPostTime(DateUtil.getDateFromYDMHMS(spiderArticle.getPostTime()));
+//        video.setContentId(articleContent.getId());
+//        video.setPageView(0);
+//        video.setIsDeleted(false);
+//        video.setCreateTime(date);
+//        video.setLastUpdateTime(date);
+//        video.setVideoType(VideoType.content_html.getValue());
+//        videoService.insert(video);
+//        logger.info("save video:{}", spiderArticle);
+//    }
+
+//    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
+//    public void saveDuowanArticle(SpiderArticle spiderArticle) {
+//
+//        Article exist = articleService.findBySourceTypeAndTitle(SourceType.duowan.getValue(), spiderArticle.getTitle());
+//
+//        if (exist != null) {
+//            logger.info("article exist. sourceType:{} title:{}", SourceType.duowan.getValue(), spiderArticle.getTitle());
+//            return;
+//        }
+//
+//        Date date = new Date();
+//        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
+//        articleContent.setCss(spiderArticle.getCss());
+//        articleContent.setContent(spiderArticle.getContent());
+//        articleContent.setIsDeleted(false);
+//        articleContent.setCreateTime(date);
+//        articleContent.setLastUpdateTime(date);
+//        articleContentService.insert(articleContent);
+//
+//        Article article = new Article();
+//        article.setSpiderCategory(SpiderCategory.lol.getValue());
+//        article.setSourceType(SourceType.duowan.getValue());
+//        article.setSourceUrl(spiderArticle.getSourceUrl());
+//        article.setTitle(spiderArticle.getTitle());
+//        article.setPostTime(DateUtil.getDateFromYDMHMS(spiderArticle.getPostTime()));
+//        article.setContentId(articleContent.getId());
+//        article.setPageView(0);
+//        article.setIsDeleted(false);
+//        article.setCreateTime(date);
+//        article.setLastUpdateTime(date);
+//        articleService.insert(article);
+//        logger.info("save duowan article:{}", spiderArticle);
+//
+//    }
+
+
     @Transactional(DataSourceSpiderConfig.TX_MANAGER)
-    public void saveVideo(SpiderArticle spiderArticle) {
-        Video exist = videoService.findBySourceTypeAndTitle(SourceType.web_78g.getValue(), spiderArticle.getTitle());
+    public void saveVideo(Integer videoType, Integer sourceType, Integer category, SpiderVideo spiderVideo) {
+
+        Video exist = videoService.findBySourceTypeAndTitle(sourceType, spiderVideo.getTitle());
 
         if (exist != null) {
-            logger.info("video exist. sourceType:{} title:{}", SourceType.web_78g.getValue(), spiderArticle.getTitle());
+            logger.info("video exist. sourceType:{} title:{}", SourceType.valueOf(sourceType), spiderVideo.getTitle());
             return;
         }
 
         Date date = new Date();
-        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
-        articleContent.setCss(spiderArticle.getCss());
-        articleContent.setContent(spiderArticle.getContent());
-        articleContent.setIsDeleted(false);
-        articleContent.setCreateTime(date);
-        articleContent.setLastUpdateTime(date);
-        articleContentService.insert(articleContent);
+        ArticleContentWithBLOBs articleContent = null;
+        if (VideoType.content_html.getValue().equals(videoType)) {
+            articleContent = new ArticleContentWithBLOBs();
+            articleContent.setCss(spiderVideo.getCss());
+            articleContent.setContent(spiderVideo.getContent());
+            articleContent.setIsDeleted(false);
+            articleContent.setCreateTime(date);
+            articleContent.setLastUpdateTime(date);
+            articleContentService.insert(articleContent);
+        }
 
         Video video = new Video();
-        video.setArticleCategory(SpiderCategory.pubg.getValue());
-        video.setSourceType(SourceType.web_78g.getValue());
-        video.setSourceUrl(spiderArticle.getSourceUrl());
-        video.setTitle(spiderArticle.getTitle());
-        video.setPostTime(null);
-        video.setContentId(articleContent.getId());
+        video.setVideoType(category);
+        video.setVideoCategory(category);
+        video.setSourceType(sourceType);
+        video.setSourceUrl(spiderVideo.getSourceUrl());
+        video.setTitle(spiderVideo.getTitle());
+        video.setCoverImgUrl(spiderVideo.getCoverImgUrl());
+        video.setVideoSource(spiderVideo.getVideoSource());
+        video.setFlashvars(spiderVideo.getFlashvars());
+        video.setPostTime(getPostTimeDate(sourceType, spiderVideo.getPostTime()));
+        if (articleContent != null) {
+            video.setContentId(articleContent.getId());
+        }
         video.setPageView(0);
         video.setIsDeleted(false);
         video.setCreateTime(date);
         video.setLastUpdateTime(date);
-        video.setVideoType(VideoType.comtent_html.getValue());
         videoService.insert(video);
-        logger.info("save video:{}", spiderArticle);
+        logger.info("save sourceType:{} video:{}", SourceType.valueOf(sourceType), spiderVideo);
+
+
     }
 
-    @Transactional(DataSourceSpiderConfig.TX_MANAGER)
-    public void saveDuowanArticle(SpiderArticle spiderArticle) {
-
-        Article exist = articleService.findBySourceTypeAndTitle(SourceType.duowan.getValue(), spiderArticle.getTitle());
-
-        if (exist != null) {
-            logger.info("article exist. sourceType:{} title:{}", SourceType.duowan.getValue(), spiderArticle.getTitle());
-            return;
+    private Date getPostTimeDate(Integer sourceType, String postTime) {
+        switch (SourceType.valueOf(sourceType)) {
+            case duowan:
+                postTime = postTime.replace("上传于", "").trim();
+                return DateUtil.getDateFromYDMHM(postTime);
+            case web_78g:
+                postTime = postTime.replace("时间：", "").trim();
+                return DateUtil.getDateFromYDMHMS(postTime);
+            case yxdown:
+                return DateUtil.getDateFromYDMHMS(postTime);
         }
-
-        Date date = new Date();
-        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
-        articleContent.setCss(spiderArticle.getCss());
-        articleContent.setContent(spiderArticle.getContent());
-        articleContent.setIsDeleted(false);
-        articleContent.setCreateTime(date);
-        articleContent.setLastUpdateTime(date);
-        articleContentService.insert(articleContent);
-
-        Article article = new Article();
-        article.setSpiderCategory(SpiderCategory.lol.getValue());
-        article.setSourceType(SourceType.duowan.getValue());
-        article.setSourceUrl(spiderArticle.getSourceUrl());
-        article.setTitle(spiderArticle.getTitle());
-        article.setPostTime(DateUtil.getDateFromYDMHMS(spiderArticle.getPostTime()));
-        article.setContentId(articleContent.getId());
-        article.setPageView(0);
-        article.setIsDeleted(false);
-        article.setCreateTime(date);
-        article.setLastUpdateTime(date);
-        articleService.insert(article);
-        logger.info("save duowan article:{}", spiderArticle);
-
+        return null;
     }
 
 
@@ -152,5 +249,9 @@ public class SpiderTxManager {
         this.videoService = videoService;
     }
 
+
+    public void saveDuowanVideo(SpiderVideo video) {
+
+    }
 
 }
