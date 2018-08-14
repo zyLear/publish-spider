@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class DuowanVideoProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(5000);
-    private String itemListRegrex = "http://video\\.duowan\\.com/lol/yule_\\d+\\.html|http://video\\.duowan\\.com/lol/yule\\.html";
+    private String itemListRegrex = "http://video\\.duowan\\.com/lol/yule_\\d\\.html|http://video\\.duowan\\.com/lol/yule\\.html";
     private Pattern pattern = Pattern.compile(itemListRegrex);
 
     @Override
