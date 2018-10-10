@@ -44,8 +44,8 @@ public class PublishWebManager {
     private Integer submit(String url, String jsonString) {
 
         try {
-            Response response = OkHttpUtil.syncExecJsonPost(url, jsonString);
-            String string = response.body().string();
+            String string = OkHttpUtil.syncExeJsonPostGetString(url, jsonString);
+//            String string = response.body().string();
             SubmitResponse submitResponse = JsonUtil.getObjectFromJson(string, SubmitResponse.class);
             if (submitResponse.getErrorCode() == 0) {
                 return submitResponse.getRefId();

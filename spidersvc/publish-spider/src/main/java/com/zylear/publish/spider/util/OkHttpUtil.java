@@ -44,4 +44,17 @@ public class OkHttpUtil {
 //            }
 //        });
 
+
+    public static String syncExeJsonPostGetString(String url, String jsonString) {
+        String content = null;
+        try {
+            Response response = syncExecJsonPost(url, jsonString);
+            content = response.body().string();
+            response.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
+
 }
